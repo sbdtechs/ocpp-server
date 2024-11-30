@@ -10,8 +10,8 @@
 **/package-lock.json
 
 # Specific files and file types to ignore
-**/*.js
-**/*.cjs
+#**/*.js
+#**/*.cjs
 **/*.md
 **/*.yml
 **/*.tsbuildinfo
@@ -21,6 +21,6 @@
 **/*.Dockerfile
 
 # Specific directories to ignore
-**/DirectusExtensions
+#**/DirectusExtensions
 **/Swarm
-**/data
+#**/data
