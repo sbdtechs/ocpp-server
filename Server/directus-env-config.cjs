@@ -13,5 +13,7 @@ module.exports = function (_env) {
     DIRECTUS_URL: 'http://ocpp-server-directus-http.tenants.svc.cluster.local:8055',
   };
 
+  console.log('Directus env config:', config);
+
   return config;
 };
