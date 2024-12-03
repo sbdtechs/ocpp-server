@@ -95,6 +95,7 @@ export function createDockerConfig() {
         host: process.env.DIRECTUS_EXTENSIONS_HOST,// 'directus',
         port: Number(process.env.DIRECTUS_EXTENSIONS_PORT) || 8055,//8055,
         generateFlows: true,
+        token: process.env.CITRINEOS_UTIL_DIRECTUS_TOKEN,
       },
       networkConnection: {
         websocketServers: [
