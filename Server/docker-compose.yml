@@ -17,6 +17,7 @@ services:
       retries: 3
   ocpp-db:
     image: citrineos/postgis:v1.1.0
+    platform: linux/amd64
     ports:
       - 5432:5432
     volumes:
@@ -82,6 +83,18 @@ services:
       APP_NAME: 'all'
       APP_ENV: 'docker'
       CITRINEOS_UTIL_DIRECTUS_TOKEN: '-ssaT85n4S-wVD21LKOCDwvXN5PtnJc0'
+      AMQP_BROKER_HOST: 'amqp-broker'
+      AMQP_BROKER_PORT: '5672'
+      AMQP_BROKER_USER: 'guest'
+      AMQP_BROKER_PASSWORD: 'guest'
+      AMQP_BROKER_EXCHANGE: 'citrineos'
+      DB_HOST: 'ocpp-db'
+      DB_PORT: '5432'
+      DB_USER: 'citrine'
+      DB_PASSWORD: 'citrine'
+      DB_DATABASE: 'citrine'
+      DIRECTUS_EXTENSIONS_HOST: 'directus'
+      DIRECTUS_EXTENSIONS_PORT: '8055'
     depends_on:
       ocpp-db:
         condition: service_healthy
