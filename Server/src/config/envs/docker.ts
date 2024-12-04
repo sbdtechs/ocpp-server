@@ -6,20 +6,6 @@ import { defineConfig, RegistrationStatusEnumType } from '@citrineos/base';
 import path from 'path';
 
 export function createDockerConfig() {
-
-  console.log('DB_HOST: ', process.env.DB_HOST);
-  console.log('DB_PORT: ', process.env.DB_PORT);
-  console.log('DB_DATABASE: ', process.env.DB_DATABASE);
-  console.log('DB_USER: ', process.env.DB_USER);
-  //console.log('DB_PASSWORD: ', process.env.DB_PASSWORD);
-  console.log('AMQP_BROKER_USER: ', process.env.AMQP_BROKER_USER);
-  //console.log('AMQP_BROKER_PASSWORD: ', process.env.AMQP_BROKER_PASSWORD);
-  console.log('AMQP_BROKER_HOST: ', process.env.AMQP_BROKER_HOST);
-  console.log('AMQP_BROKER_PORT: ', process.env.AMQP_BROKER_PORT);
-  console.log('DIRECTUS_EXTENSIONS_HOST: ', process.env.DIRECTUS_EXTENSIONS_HOST);
-  console.log('DIRECTUS_EXTENSIONS_PORT: ', process.env.DIRECTUS_EXTENSIONS_PORT);
-  console.log('APP_ENV: ', process.env.APP_ENV);
-
   return defineConfig({
     env: 'development',
     centralSystem: {
@@ -61,12 +47,12 @@ export function createDockerConfig() {
     },
     data: {
       sequelize: {
-        host: process.env.DB_HOST, //'ocpp-db',
-        port: Number(process.env.DB_PORT) || 5432, //5432,
-        database: process.env.DB_DATABASE, //'citrine',
+        host: 'ocpp-db',
+        port: 5432,
+        database: 'citrine',
         dialect: 'postgres',
-        username: process.env.DB_USER, //'citrine',
-        password: process.env.DB_PASSWORD, //'citrine',
+        username: 'citrine',
+        password: 'citrine',
         storage: '',
         sync: false,
         alter: true,
@@ -78,8 +64,8 @@ export function createDockerConfig() {
       },
       messageBroker: {
         amqp: {
-          url: 'amqp://' + process.env.AMQP_BROKER_USER + ':' + process.env.AMQP_BROKER_PASSWORD + '@' + process.env.AMQP_BROKER_HOST + ':' + process.env.AMQP_BROKER_PORT, //'amqp://guest:guest@amqp-broker:5672',
-          exchange: process.env.AMQP_BROKER_EXCHANGE || 'citrineos',
+          url: 'amqp://guest:guest@amqp-broker:5672',
+          exchange: 'citrineos',
         },
       },
       swagger: {
@@ -92,10 +78,9 @@ export function createDockerConfig() {
         exposeMessage: true,
       },
       directus: {
-        host: process.env.DIRECTUS_EXTENSIONS_HOST,// 'directus',
-        port: Number(process.env.DIRECTUS_EXTENSIONS_PORT) || 8055,//8055,
+        host: 'directus',
+        port: 8055,
         generateFlows: true,
-        token: process.env.CITRINEOS_UTIL_DIRECTUS_TOKEN,
       },
       networkConnection: {
         websocketServers: [

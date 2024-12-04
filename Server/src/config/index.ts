@@ -10,9 +10,13 @@ import { createDockerConfig } from './envs/docker';
 function getConfig() {
   switch (process.env.APP_ENV) {
     case 'local':
-      return createLocalConfig();
+      let localConfig = createLocalConfig();
+      console.log('localConfig: ', localConfig);
+      return localConfig;
     case 'docker':
-      return createDockerConfig();
+      let dockerConfig = createDockerConfig();
+      console.log('dockerConfig: ', dockerConfig);
+      return dockerConfig;
     default:
       throw new Error('Invalid APP_ENV "${process.env.APP_ENV}"');
   }

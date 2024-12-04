@@ -82,19 +82,16 @@ services:
     environment:
       APP_NAME: 'all'
       APP_ENV: 'docker'
+      CITRINEOS_UTIL_MESSAGEBROKER_AMQP_URL: amqp://guest:guest@amqp-broker:5672
+      CITRINEOS_UTIL_MESSAGEBROKER_AMQP_EXCHANGE: 'citrineos'
+      CITRINEOS_DATA_SEQUELIZE_HOST: 'ocpp-db'
+      CITRINEOS_DATA_SEQUELIZE_PORT: '5432'
+      CITRINEOS_DATA_SEQUELIZE_USERNAME: 'citrine'
+      CITRINEOS_DATA_SEQUELIZE_PASSWORD: 'citrine'
+      CITRINEOS_DATA_SEQUELIZE_DATABASE: 'citrine'
+      CITRINEOS_UTIL_DIRECTUS_HOST: 'directus'
+      CITRINEOS_UTIL_DIRECTUS_PORT: '8055'
       CITRINEOS_UTIL_DIRECTUS_TOKEN: '-ssaT85n4S-wVD21LKOCDwvXN5PtnJc0'
-      AMQP_BROKER_HOST: 'amqp-broker'
-      AMQP_BROKER_PORT: '5672'
-      AMQP_BROKER_USER: 'guest'
-      AMQP_BROKER_PASSWORD: 'guest'
-      AMQP_BROKER_EXCHANGE: 'citrineos'
-      DB_HOST: 'ocpp-db'
-      DB_PORT: '5432'
-      DB_USER: 'citrine'
-      DB_PASSWORD: 'citrine'
-      DB_DATABASE: 'citrine'
-      DIRECTUS_EXTENSIONS_HOST: 'directus'
-      DIRECTUS_EXTENSIONS_PORT: '8055'
     depends_on:
       ocpp-db:
         condition: service_healthy
@@ -125,6 +122,7 @@ services:
         condition: service_healthy
     environment:
       APP_NAME: 'all'
+      APP_ENV: 'docker'      
       KEY: '1234567890'
       SECRET: '0987654321'
       ADMIN_EMAIL: 'admin@citrineos.com'
@@ -133,11 +131,16 @@ services:
       EXTENSIONS_AUTO_RELOAD: 'true'
       EXTENSIONS_CACHE_TTL: '1s'
       DB_CLIENT: 'pg'
+      CITRINEOS_DATA_SEQUELIZE_HOST: ocpp-db
+      CITRINEOS_DATA_SEQUELIZE_PORT: 5432
+      CITRINEOS_DATA_SEQUELIZE_DATABASE: 'citrine'
+      CITRINEOS_DATA_SEQUELIZE_USERNAME: 'citrine'
+      CITRINEOS_DATA_SEQUELIZE_PASSWORD: 'citrine'
       DB_HOST: ocpp-db
       DB_PORT: 5432
       DB_DATABASE: 'citrine'
       DB_USER: 'citrine'
-      DB_PASSWORD: 'citrine'
+      DB_PASSWORD: 'citrine'      
       WEBSOCKETS_ENABLED: 'true'
     healthcheck:
       test: wget --no-verbose --tries=1 --spider http://127.0.0.1:8055/server/health || exit 1
