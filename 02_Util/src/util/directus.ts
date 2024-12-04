@@ -40,6 +40,9 @@ export class DirectusUtil implements IFileAccess {
       : new Logger<ILogObj>({ name: this.constructor.name });
     let client;
     if (this._config.util.directus?.token) {
+      console.log('Using Directus token: ', this._config.util.directus?.token);
+      console.log('Using Directus host: ', this._config.util.directus?.host);
+      console.log('Using Directus port: ', this._config.util.directus?.port);
       // Auth with static token
       client = createDirectus(
         `http://${this._config.util.directus?.host}:${this._config.util.directus?.port}`,
@@ -50,6 +53,8 @@ export class DirectusUtil implements IFileAccess {
       this._config.util.directus?.username &&
       this._config.util.directus?.password
     ) {
+      console.log('Using Directus username: ', this._config.util.directus?.username);
+      console.log('Using Directus password: ', this._config.util.directus?.password);
       // Auth with username and password
       client = createDirectus<Schema>(
         `http://${this._config.util.directus?.host}:${this._config.util.directus?.port}`,
@@ -64,6 +69,8 @@ export class DirectusUtil implements IFileAccess {
         this._config.util.directus.password,
       );
     } else {
+      console.log('No Auth Directus host: ', this._config.util.directus?.host);
+      console.log('No Auth Directus port: ', this._config.util.directus?.port);
       // No auth
       client = createDirectus<Schema>(
         `http://${this._config.util.directus?.host}:${this._config.util.directus?.port}`,
@@ -175,6 +182,10 @@ export class DirectusUtil implements IFileAccess {
                   text: 'Docker Hybrid (host.docker.internal:8080)',
                   value: 'http://host.docker.internal:8080',
                 },
+                {
+                  text: 'Kubernetes Service (ocpp-server-citrineos-http.tenants.svc.cluster.local:8080)',
+                  value: 'http://ocpp-server-citrineos-http.tenants.svc.cluster.local:8080',
+                },                
               ],
               allowOther: true,
             },
